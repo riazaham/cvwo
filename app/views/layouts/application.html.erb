@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CvwoTodoSrc</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <h3 style="text-align: right; border: solid lightsalmon; border-width: 10px; margin: 0; padding: 0; color: white; background-color: lightsalmon;">
+      Riaz Ahamed, CVWO mid assignment
+    </h3>
+    <%= yield %>
+  </body>
+</html>
