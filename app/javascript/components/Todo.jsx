@@ -88,7 +88,7 @@ class Todo extends React.Component {
                     </div>
                 </div>
                 <br/>
-                <div style={{width:'100%', margin:'0 auto'}}>
+                <div style={{textAlign:"center", margin:"0 auto"}}>
                     <button onClick={this.deleteTodo} style={{ textDecoration: 'none' }}>
                         <div className='new-todo-link'>
                             -
