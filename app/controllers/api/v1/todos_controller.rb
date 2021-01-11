@@ -23,6 +23,7 @@ class Api::V1::TodosController < ApplicationController
   end
 
   def destroy
+    todo = Todo.find(params[:id])
     todo&.destroy
     render json: { message: 'Todo deleted!' }
   end
