@@ -1,0 +1,49 @@
+.todo-list {
+    max-width: 600px;
+    margin: 0px auto;
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    max-width: 800px;
+    margin: 0px auto;
+}
+
+.card2 {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    max-width: 770px;
+    margin: 0px auto;
+    background-color: #264653;
+    color: white;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 16px;
+}
+
+.new-todo-link {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin: auto;
+    text-align: center;
+    color: white;
+    line-height: 50px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #e76f51;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.new-todo-link:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
+}
