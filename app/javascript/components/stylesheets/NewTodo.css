@@ -1,0 +1,9 @@
+input {
+    width: 100%;
+    border: 1px solid lightgray;
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid lightgray;
+}

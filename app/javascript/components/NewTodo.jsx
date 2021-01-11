@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import './stylesheets/NewTodo.css'
 
 class NewTodo extends Component {
     constructor(props) {
@@ -59,10 +60,14 @@ class NewTodo extends Component {
                     </h1>
                     <p>Profile</p>
                 </div>
-                <h2>Add a new Todo</h2>
+                <div className='title-card container' style={{textAlign:"center"}}>
+                    Add a new todo
+                </div>
                 <form onSubmit={this.onSubmit}>
-                    <div>
+                    <br/>
+                    <div className='card container'>
                         <label>Name</label>
+                        <br/>
                         <input
                             type='text'
                             name='name'
@@ -71,8 +76,10 @@ class NewTodo extends Component {
                             onChange={this.onChange}
                         />
                     </div>
-                    <div>
+                    <br/>
+                    <div className='card container'>
                         <label>Description</label>
+                        <br/>
                         <textarea
                             name='body'
                             id='body'
@@ -81,8 +88,10 @@ class NewTodo extends Component {
                             onChange={this.onChange}
                         />
                     </div>
-                    <div>
+                    <br/>
+                    <div className='card container'>
                         <label>Deadline</label>
+                        <br/>
                         <input
                             type='text'
                             name='deadline'
@@ -91,8 +100,10 @@ class NewTodo extends Component {
                             onChange={this.onChange}
                         />
                     </div>
-                    <div>
+                    <br/>
+                    <div className='card container'>
                         <label>Progress</label>
+                        <br/>
                         <input
                             type='text'
                             name='progress'
@@ -101,8 +112,17 @@ class NewTodo extends Component {
                             onChange={this.onChange}
                         />
                     </div>
-                    <button type="submit">Add Todo</button>
-                    <Link to='/'>Home</Link>
+                    <br/>
+                    <button type="submit" style={{ textDecoration: 'none' }}>
+                        <div className='button-link-design'>
+                            +
+                        </div>
+                    </button>
+                    <Link to={`/`} style={{ textDecoration: 'none' }}>
+                        <div className='button-link-design'>
+                            H
+                        </div>
+                    </Link>
                 </form>
             </div>
         );
