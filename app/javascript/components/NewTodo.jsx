@@ -119,9 +119,11 @@ class NewTodo extends Component {
                                 +
                             </button>
                         </div>
-                        <div className='button-link-design' style={{backgroundColor:'#2a9d8f'}}>
-                            <Link to={`/`} style={{ textDecoration:'none', color:'white', cursor:'pointer' }}>
-                                H
+                        <div className='centering-div'>
+                            <Link to={`/`} style={{ textDecoration:'none', display:'inline-block' }}>
+                                <div className='button-link-design' style={{backgroundColor:'#2a9d8f'}}>
+                                    H
+                                </div>
                             </Link>
                         </div>
                     </div>

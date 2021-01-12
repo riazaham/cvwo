@@ -23,20 +23,3 @@ button {
     gap: 20px;
     margin: 0 auto;
 }
-
-.home-button {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    margin: auto;
-    text-align: center;
-    color: #2a9d8f;
-    line-height: 50px;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    background-color: #e76f51;
-    font-size: 24px;
-    font-weight: 400;
-    overflow: clip;
-    cursor: pointer;
-}

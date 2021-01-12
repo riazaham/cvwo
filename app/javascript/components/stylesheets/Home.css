@@ -3,7 +3,8 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 800px;
-    margin: 0px auto;
+    padding: 16px;
+    margin: 0 auto;
 }
 
 .title-card {
@@ -14,14 +15,11 @@
     margin: 0px auto;
     background-color: #264653;
     color: white;
+    padding: 16px;
 }
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-    padding: 16px;
 }
 
 
@@ -44,4 +42,9 @@
 
 .button-link-design:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
+}
+
+.centering-div {
+    width: fit-content;
+    margin: 0 auto;
 }

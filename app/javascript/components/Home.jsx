@@ -36,25 +36,27 @@ class Home extends Component {
                     </h1>
                     <p>Profile</p>
                 </div>
-                <div className='button-link-design'>
-                    <Link to={`/new_todo`} style={{ textDecoration:'none', color:'white', cursor:'pointer' }}>
-                        +
+                <div className='centering-div'>
+                    <Link to={`/new_todo`} style={{ textDecoration:'none', color:'white', cursor:'pointer', display:'inline-block' }}>
+                        <div className='button-link-design'>
+                            +
+                        </div>
                     </Link>
                 </div>
                 <br/>
                 <div className='title-card container'>
                     Title
                 </div>
-                <div>
-                    {this.state.todos.map((todo) => (
-                        <Link to={`/todos/${todo.id}`} style={{ textDecoration: 'none' }} key={todo.id}>
+                {this.state.todos.map((todo) => (
+                    <div className='centering-div'>
+                        <Link to={`/todos/${todo.id}`} style={{ textDecoration:'none', display:'inline-block' }} key={todo.id}>
                             <br />
-                            <div className='card container'>
+                            <div className='card'>
                                 { todo.name }
                             </div>
                         </Link>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
         );
     };

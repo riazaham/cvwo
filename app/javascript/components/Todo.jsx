@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './stylesheets/Todo.css'
 
 class Todo extends React.Component {
@@ -88,12 +89,21 @@ class Todo extends React.Component {
                     </div>
                 </div>
                 <br/>
-                <div style={{textAlign:"center", margin:"0 auto"}}>
-                    <button onClick={this.deleteTodo} style={{ textDecoration: 'none' }}>
-                        <div className='button-link-design'>
-                            -
-                        </div>
-                    </button>
+                <div className='button-flex-row'>
+                    <div className='centering-div'>
+                        <button onClick={this.deleteTodo} style={{ textDecoration: 'none' }}>
+                            <div className='button-link-design'>
+                                -
+                            </div>
+                        </button>
+                    </div>
+                    <div className='centering-div'>
+                        <Link to={`/`} style={{ textDecoration:'none', display:'inline-block' }}>
+                            <div className='button-link-design' style={{backgroundColor:'#2a9d8f'}}>
+                                H
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </div>
         );
