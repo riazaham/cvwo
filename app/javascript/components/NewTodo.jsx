@@ -113,16 +113,18 @@ class NewTodo extends Component {
                         />
                     </div>
                     <br/>
-                    <button type="submit" style={{ textDecoration: 'none' }}>
+                    <div className='button-flex-row'>
                         <div className='button-link-design'>
-                            +
+                            <button type="submit">
+                                +
+                            </button>
                         </div>
-                    </button>
-                    <Link to={`/`} style={{ textDecoration: 'none' }}>
-                        <div className='button-link-design'>
-                            H
+                        <div className='button-link-design' style={{backgroundColor:'#2a9d8f'}}>
+                            <Link to={`/`} style={{ textDecoration:'none', color:'white', cursor:'pointer' }}>
+                                H
+                            </Link>
                         </div>
-                    </Link>
+                    </div>
                 </form>
             </div>
         );

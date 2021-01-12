@@ -36,11 +36,11 @@ class Home extends Component {
                     </h1>
                     <p>Profile</p>
                 </div>
-                <Link to={`/new_todo`} style={{ textDecoration: 'none' }}>
-                    <div className='button-link-design'>
+                <div className='button-link-design'>
+                    <Link to={`/new_todo`} style={{ textDecoration:'none', color:'white', cursor:'pointer' }}>
                         +
-                    </div>
-                </Link>
+                    </Link>
+                </div>
                 <br/>
                 <div className='title-card container'>
                     Title
