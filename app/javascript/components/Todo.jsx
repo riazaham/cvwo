@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './stylesheets/Todo.css'
+import Moment from 'moment';
 
 class Todo extends React.Component {
     constructor(props) {
@@ -80,7 +81,7 @@ class Todo extends React.Component {
                     <div className='todo-flex-column-2'>
                         <div className='todo-flex-item' style={{flexGrow:2}}>
                             <b>Deadline:</b>
-                            <p>{ this.state.todo.deadline }</p>
+                            <p>{ Moment(this.state.todo.deadline).format("DD MMMM yyyy") }</p>
                         </div>
                         <div className='todo-flex-item' style={{flexGrow:2}}>
                             <b>Progress:</b>

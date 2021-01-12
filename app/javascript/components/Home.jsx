@@ -48,8 +48,8 @@ class Home extends Component {
                     Title
                 </div>
                 {this.state.todos.map((todo) => (
-                    <div className='centering-div'>
-                        <Link to={`/todos/${todo.id}`} style={{ textDecoration:'none', display:'inline-block' }} key={todo.id}>
+                    <div className='centering-div' key={todo.id}>
+                        <Link to={`/todos/${todo.id}`} style={{ textDecoration:'none', display:'inline-block' }}>
                             <br />
                             <div className='card'>
                                 { todo.name }

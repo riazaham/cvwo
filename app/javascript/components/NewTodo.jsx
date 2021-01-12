@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import PropTypes from 'prop-types'; 
 import './stylesheets/NewTodo.css'
+import "react-datepicker/dist/react-datepicker.css";
 
 class NewTodo extends Component {
     constructor(props) {
@@ -13,12 +16,19 @@ class NewTodo extends Component {
         };
 
         this.onChange = this.onChange.bind(this);
+        this.onDateChange = this.onDateChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChange(event) {
         this.setState({
             [event.target.name]: event.target.value
+        });
+    }
+
+    onDateChange(date) {
+        this.setState({
+            deadline: date
         });
     }
 
@@ -92,12 +102,13 @@ class NewTodo extends Component {
                     <div className='card container'>
                         <label>Deadline</label>
                         <br/>
-                        <input
-                            type='text'
+                        <DatePicker
                             name='deadline'
                             id='deadline'
-                            required
-                            onChange={this.onChange}
+                            autoComplete='off'
+                            dateFormat="dd MMMM yyyy"
+                            selected={this.state.deadline}
+                            onChange={this.onDateChange}
                         />
                     </div>
                     <br/>
@@ -108,7 +119,6 @@ class NewTodo extends Component {
                             type='text'
                             name='progress'
                             id='progress'
-                            required
                             onChange={this.onChange}
                         />
                     </div>
