@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import PropTypes from 'prop-types'; 
 import './stylesheets/NewTodo.css'
+import './stylesheets/inputRange.css'
 import "react-datepicker/dist/react-datepicker.css";
+import InputRange from 'react-input-range';
 
 class NewTodo extends Component {
     constructor(props) {
@@ -12,11 +13,12 @@ class NewTodo extends Component {
             name: "",
             body: "",
             deadline: "",
-            progress: "",
+            progress: 0,
         };
 
         this.onChange = this.onChange.bind(this);
         this.onDateChange = this.onDateChange.bind(this);
+        this.onProgressChange = this.onProgressChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -29,6 +31,12 @@ class NewTodo extends Component {
     onDateChange(date) {
         this.setState({
             deadline: date
+        });
+    }
+
+    onProgressChange(value) {
+        this.setState({
+            progress: value
         });
     }
 
@@ -94,7 +102,6 @@ class NewTodo extends Component {
                             name='body'
                             id='body'
                             rows="3"
-                            required
                             onChange={this.onChange}
                         />
                     </div>
@@ -114,13 +121,16 @@ class NewTodo extends Component {
                     <br/>
                     <div className='card container'>
                         <label>Progress</label>
-                        <br/>
-                        <input
-                            type='text'
+                        <br/><br/><br/>
+                        <InputRange
                             name='progress'
                             id='progress'
-                            onChange={this.onChange}
+                            minValue={0}
+                            maxValue={100}
+                            value={this.state.progress}
+                            onChange={this.onProgressChange}
                         />
+                        <br/>
                     </div>
                     <br/>
                     <div className='button-flex-row'>

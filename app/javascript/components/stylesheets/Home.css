@@ -48,3 +48,18 @@
     width: fit-content;
     margin: 0 auto;
 }
+
+.top-button-flex-row {
+    display: flex;
+    width: 830px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.sort-button-flex-row {
+    display: flex;
+    width: fit-content;
+    margin-left: auto;
+    align-items: center;
+    gap: 5px;
+}

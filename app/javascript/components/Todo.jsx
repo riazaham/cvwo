@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './stylesheets/Todo.css'
+import './stylesheets/Todo.css';
 import Moment from 'moment';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import './stylesheets/circularProgressbar.css';
+
 
 class Todo extends React.Component {
     constructor(props) {
@@ -85,7 +88,7 @@ class Todo extends React.Component {
                         </div>
                         <div className='todo-flex-item' style={{flexGrow:2}}>
                             <b>Progress:</b>
-                            <p>{ this.state.todo.progress }</p>
+                            <p style={{textAlign:'center'}}><CircularProgressbar value={this.state.todo.progress} text={`${this.state.todo.progress}%`} /></p>  
                         </div>
                     </div>
                 </div>
