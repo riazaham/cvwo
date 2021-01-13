@@ -14,6 +14,8 @@ class Home extends Component {
         this.changeSortOrder = this.changeSortOrder.bind(this);
         this.sortByProgressAscending = this.sortByProgressAscending.bind(this);
         this.sortByProgressDescending = this.sortByProgressDescending.bind(this);
+        this.sortByCreatedAscending = this.sortByCreatedFirst.bind(this);
+        this.sortByCreatedDescending = this.sortByCreatedLast.bind(this);
     }
 
     componentDidMount() {
@@ -51,6 +53,18 @@ class Home extends Component {
         })
     }
 
+    sortByCreatedFirst() {
+        this.setState({
+            todos: this.state.todos.sort((a, b) => a.created_at > b.created_at ? 1 : -1)
+        })
+    }
+
+    sortByCreatedLast() {
+        this.setState({
+            todos: this.state.todos.sort((a, b) => a.created_at > b.created_at ? -1 : 1)
+        })
+    }
+
     changeSortOrder() {
         switch (this.state.sortOrder) {
             case 'Progress up':
@@ -58,6 +72,12 @@ class Home extends Component {
                 break
             case 'Progress down':
                 this.sortByProgressDescending();
+                break
+            case 'Created first':
+                this.sortByCreatedFirst();
+                break
+            case 'Created last':
+                this.sortByCreatedLast();
                 break
         }
     }
@@ -86,8 +106,8 @@ class Home extends Component {
                         <select name="sort-by" id="sort-by" onChange={this.onSortOrderChange}>
                             <option value="Progress up">Progress Up</option>
                             <option value="Progress down">Progress Down</option>
-                            <option value="Progress down">Created first</option>
-                            <option value="Progress down">Created last</option>
+                            <option value="Created first">Created first</option>
+                            <option value="Created last">Created last</option>
                         </select>
                         <button type="button" onClick={this.changeSortOrder}>
                             <div className='button-link-design' style={{fontSize:'16px', backgroundColor:'#2a9d8f'}}>
