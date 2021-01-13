@@ -7,15 +7,17 @@ class Home extends Component {
         super(props);
         this.state = {
             todos: [],
-            sortOrder: 'progressUp'
+            sortOrder: ''
         };
 
         this.onSortOrderChange = this.onSortOrderChange.bind(this);
         this.changeSortOrder = this.changeSortOrder.bind(this);
         this.sortByProgressAscending = this.sortByProgressAscending.bind(this);
         this.sortByProgressDescending = this.sortByProgressDescending.bind(this);
-        this.sortByCreatedAscending = this.sortByCreatedFirst.bind(this);
-        this.sortByCreatedDescending = this.sortByCreatedLast.bind(this);
+        this.sortByCreatedFirst = this.sortByCreatedFirst.bind(this);
+        this.sortByCreatedLast = this.sortByCreatedLast.bind(this);
+        this.sortByDeadlineAscending = this.sortByDeadlineAscending.bind(this);
+        this.sortByDeadlineDescending = this.sortByDeadlineDescending.bind(this);
     }
 
     componentDidMount() {
@@ -65,6 +67,18 @@ class Home extends Component {
         })
     }
 
+    sortByDeadlineAscending() {
+        this.setState({
+            todos: this.state.todos.sort((a, b) => a.deadline > b.deadline ? 1 : -1)
+        })
+    }
+
+    sortByDeadlineDescending() {
+        this.setState({
+            todos: this.state.todos.sort((a, b) => a.deadline > b.deadline ? -1 : 1)
+        })
+    }
+
     changeSortOrder() {
         switch (this.state.sortOrder) {
             case 'Progress up':
@@ -78,6 +92,12 @@ class Home extends Component {
                 break
             case 'Created last':
                 this.sortByCreatedLast();
+                break
+            case 'Deadline up':
+                this.sortByDeadlineAscending();
+                break
+            case 'Deadline down':
+                this.sortByDeadlineDescending();
                 break
         }
     }
@@ -108,6 +128,8 @@ class Home extends Component {
                             <option value="Progress down">Progress Down</option>
                             <option value="Created first">Created first</option>
                             <option value="Created last">Created last</option>
+                            <option value="Deadline up">Deadline up</option>
+                            <option value="Deadline down">Deadline down</option>
                         </select>
                         <button type="button" onClick={this.changeSortOrder}>
                             <div className='button-link-design' style={{fontSize:'16px', backgroundColor:'#2a9d8f'}}>
