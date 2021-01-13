@@ -9,6 +9,11 @@ class Home extends Component {
             todos: [],
             sortOrder: 'progressUp'
         };
+
+        this.onSortOrderChange = this.onSortOrderChange.bind(this);
+        this.changeSortOrder = this.changeSortOrder.bind(this);
+        this.sortByProgressAscending = this.sortByProgressAscending.bind(this);
+        this.sortByProgressDescending = this.sortByProgressDescending.bind(this);
     }
 
     componentDidMount() {
@@ -28,28 +33,31 @@ class Home extends Component {
             }).catch(() => this.props.history.push("/"));
     }
 
-    sortByProgressAscending(data) {
+    onSortOrderChange(e) {
         this.setState({
-            todos: data.sort((a, b) => a.progress > b.progress ? 1 : -1)
+            sortOrder: e.target.value
         })
     }
 
-    sortByProgressDescending(data) {
+    sortByProgressAscending() {
         this.setState({
-            todos: data.sort((a, b) => a.progress > b.progress ? -1 : 1)
+            todos: this.state.todos.sort((a, b) => a.progress > b.progress ? 1 : -1)
         })
     }
 
-    changeSortOrder(sortOrderInput) {
+    sortByProgressDescending() {
         this.setState({
-            sortOrder: sortOrderInput
+            todos: this.state.todos.sort((a, b) => a.progress > b.progress ? -1 : 1)
         })
+    }
+
+    changeSortOrder() {
         switch (this.state.sortOrder) {
-            case 'progressUp':
-                this.sortByProgressAscending(this.state.todos);
+            case 'Progress up':
+                this.sortByProgressAscending();
                 break
-            case 'progressDown':
-                this.sortByProgressDescending(this.state.todos);
+            case 'Progress down':
+                this.sortByProgressDescending();
                 break
         }
     }
@@ -75,9 +83,11 @@ class Home extends Component {
                     </div>
                     <div className='sort-button-flex-row'>
                         <label>Sort by:</label>
-                        <select name="sort-by" id="sort-by">
-                            <option value="progress up">Progress Up</option>
-                            <option value="progress down">Progress Down</option>
+                        <select name="sort-by" id="sort-by" onChange={this.onSortOrderChange}>
+                            <option value="Progress up">Progress Up</option>
+                            <option value="Progress down">Progress Down</option>
+                            <option value="Progress down">Created first</option>
+                            <option value="Progress down">Created last</option>
                         </select>
                         <button type="button" onClick={this.changeSortOrder}>
                             <div className='button-link-design' style={{fontSize:'16px', backgroundColor:'#2a9d8f'}}>
@@ -91,9 +101,7 @@ class Home extends Component {
                     Title
                 </div>
                 <div>
-                    {data
-                    .sort((a, b) => a.progress > b.progress ? -1 : 1)
-                    .map((todo) => (
+                    {data.map((todo) => (
                         <div className='centering-div' key={todo.id}>
                             <Link to={`/todos/${todo.id}`} style={{ textDecoration:'none', display:'inline-block' }}>
                                 <br />
