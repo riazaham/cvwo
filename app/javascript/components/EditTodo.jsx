@@ -5,9 +5,8 @@ import '../../assets/stylesheets/NewTodo.css'
 import '../../assets/stylesheets/inputRange.css'
 import "react-datepicker/dist/react-datepicker.css";
 import InputRange from 'react-input-range';
-import Moment from 'moment';
 
-class NewTodo extends Component {
+class EditTodo extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,9 +40,41 @@ class NewTodo extends Component {
         });
     }
 
+    componentDidMount() {
+        const {
+            match: {
+                params: { id }
+            }
+        } = this.props;
+
+        const url = `/api/v1/todos/${id}`;
+
+        fetch(url)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("Network response was not ok.");
+        })
+        .then(response => this.setState({ 
+            name: response.name,
+            body: response.body,
+            deadline: new Date(response.deadline),
+            progress: response.progress
+        }))
+        .catch(() => this.props.history.push("/todos"));
+    }
+
     onSubmit(event) {
+        const {
+            match: {
+                params: { id }
+            }
+        } = this.props;
+
+        const url = `/api/v1/todos/${id}`;
+        
         event.preventDefault();
-        const url = "/api/v1/todos";
         const {name, body, deadline, progress} = this.state
 
         const data = {
@@ -52,7 +83,7 @@ class NewTodo extends Component {
 
         const token = document.querySelector('meta[name="csrf-token"]').content;
         fetch(url, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 "X-CSRF-Token": token,
                 "Content-Type": "application/json"
@@ -80,7 +111,7 @@ class NewTodo extends Component {
                     <p>Profile</p>
                 </div>
                 <div className='title-card container' style={{textAlign:"center"}}>
-                    Add a new todo
+                    Edit todo
                 </div>
                 <form onSubmit={this.onSubmit}>
                     <br/>
@@ -88,6 +119,7 @@ class NewTodo extends Component {
                         <label>Name</label>
                         <br/>
                         <input
+                            value={this.state.name}
                             type='text'
                             name='name'
                             id='name'
@@ -100,6 +132,7 @@ class NewTodo extends Component {
                         <label>Description</label>
                         <br/>
                         <textarea
+                            value={this.state.body}
                             name='body'
                             id='body'
                             rows="3"
@@ -154,4 +187,4 @@ class NewTodo extends Component {
     };
 }
 
-export default NewTodo
+export default EditTodo

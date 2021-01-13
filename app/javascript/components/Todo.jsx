@@ -22,7 +22,7 @@ class Todo extends React.Component {
             }
         } = this.props;
 
-        const url = `/api/v1/show/${id}`;
+        const url = `/api/v1/todos/${id}`;
 
         fetch(url)
         .then(response => {
@@ -43,7 +43,7 @@ class Todo extends React.Component {
                 params: { id }
             }
         } = this.props;
-        const url = `/api/v1/destroy/${id}`;
+        const url = `/api/v1/todos/${id}`;
         const token = document.querySelector('meta[name="csrf-token"]').content;
 
         fetch(url, {
@@ -102,9 +102,16 @@ class Todo extends React.Component {
                         </button>
                     </div>
                     <div className='centering-div'>
+                        <Link to={`/todos/${this.state.todo.id}/edit`} style={{ textDecoration:'none', display:'inline-block' }}>
+                            <div className='button-link-design' style={{backgroundColor:'#2a9d8f', fontSize:'16px'}}>
+                                Edit
+                            </div>
+                        </Link>
+                    </div>
+                    <div className='centering-div'>
                         <Link to={`/`} style={{ textDecoration:'none', display:'inline-block' }}>
-                            <div className='button-link-design' style={{backgroundColor:'#2a9d8f'}}>
-                                H
+                            <div className='button-link-design' style={{backgroundColor:'#2a9d8f',fontSize:'16px'}}>
+                                Home
                             </div>
                         </Link>
                     </div>

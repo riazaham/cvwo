@@ -21,7 +21,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        const url = "api/v1/todos/index";
+        const url = "api/v1/todos";
         fetch(url)
             .then(response => {
                 if (response.ok) {
@@ -115,7 +115,7 @@ class Home extends Component {
                 </div>
                 <div className='top-button-flex-row'>
                     <div style={{marginLeft:'380px'}}>
-                        <Link to={`/new_todo`} style={{ textDecoration:'none', color:'white', cursor:'pointer', display:'inline-block' }}>
+                        <Link to={`/new`} style={{ textDecoration:'none', color:'white', cursor:'pointer', display:'inline-block' }}>
                             <div className='button-link-design'>
                                 +
                             </div>

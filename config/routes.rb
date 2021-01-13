@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      get 'todos/index'
-      post 'todos/create'
-      get '/show/:id', to: 'todos#show'
-      delete '/destroy/:id', to: 'todos#destroy'
+      resources :todos
     end
   end
   root 'home#index'
