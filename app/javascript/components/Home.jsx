@@ -90,18 +90,20 @@ class Home extends Component {
                 <div className='title-card container'>
                     Title
                 </div>
-                {data
-                .sort((a, b) => a.progress > b.progress ? -1 : 1)
-                .map((todo) => (
-                    <div className='centering-div' key={todo.id}>
-                        <Link to={`/todos/${todo.id}`} style={{ textDecoration:'none', display:'inline-block' }}>
-                            <br />
-                            <div className='card'>
-                                { todo.name }
-                            </div>
-                        </Link>
-                    </div>
-                ))}
+                <div>
+                    {data
+                    .sort((a, b) => a.progress > b.progress ? -1 : 1)
+                    .map((todo) => (
+                        <div className='centering-div' key={todo.id}>
+                            <Link to={`/todos/${todo.id}`} style={{ textDecoration:'none', display:'inline-block' }}>
+                                <br />
+                                <div className='card'>
+                                    { todo.name }
+                                </div>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     };
