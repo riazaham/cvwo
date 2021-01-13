@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import './stylesheets/Home.css';
+import '../../assets/stylesheets/Home.css';
 
 class Home extends Component {
     constructor(props) {
@@ -79,7 +79,7 @@ class Home extends Component {
                             <option value="progress up">Progress Up</option>
                             <option value="progress down">Progress Down</option>
                         </select>
-                        <button type="button" onclick={this.changeSortOrder}>
+                        <button type="button" onClick={this.changeSortOrder}>
                             <div className='button-link-design' style={{fontSize:'16px', backgroundColor:'#2a9d8f'}}>
                                 Sort
                             </div>

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import './stylesheets/NewTodo.css'
-import './stylesheets/inputRange.css'
+import '../../assets/stylesheets/NewTodo.css'
+import '../../assets/stylesheets/inputRange.css'
 import "react-datepicker/dist/react-datepicker.css";
 import InputRange from 'react-input-range';
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './stylesheets/Todo.css';
+import '../../assets/stylesheets/Todo.css';
+import '../../assets/stylesheets/circularProgressbar.css';
 import Moment from 'moment';
 import { CircularProgressbar } from 'react-circular-progressbar';
-import './stylesheets/circularProgressbar.css';
 
 
 class Todo extends React.Component {
