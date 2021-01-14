@@ -10,6 +10,7 @@ class Todo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            category_id: '',
             todo: ''
         };
         this.deleteTodo = this.deleteTodo.bind(this);
@@ -18,11 +19,11 @@ class Todo extends React.Component {
     componentDidMount() {
         const {
             match: {
-                params: { id }
+                params: { category_id, id  }
             }
         } = this.props;
 
-        const url = `/api/v1/todos/${id}`;
+        const url = `/api/v1/categories/${category_id}/todos/${id}`;
 
         fetch(url)
         .then(response => {
@@ -32,18 +33,19 @@ class Todo extends React.Component {
           throw new Error("Network response was not ok.");
         })
         .then(response => this.setState({ 
+            category_id: category_id,
             todo: response 
         }))
-        .catch(() => this.props.history.push("/todos"));
+        .catch(() => this.props.history.push(`/categories/${category_id}/todos`));
     }
 
     deleteTodo() {
         const {
             match: {
-                params: { id }
+                params: { category_id, id }
             }
         } = this.props;
-        const url = `/api/v1/todos/${id}`;
+        const url = `/api/v1/categories/${category_id}/todos/${id}`;
         const token = document.querySelector('meta[name="csrf-token"]').content;
 
         fetch(url, {
@@ -58,7 +60,7 @@ class Todo extends React.Component {
             } else {
                 throw new Error("Network response was not ok.");
             }
-        }).then(() => this.props.history.push('/todos'))
+        }).then(() => this.props.history.push(`/categories/${category_id}/todos`))
         .catch(error => console.log(error.message));
     }
 
@@ -102,14 +104,14 @@ class Todo extends React.Component {
                         </button>
                     </div>
                     <div className='centering-div'>
-                        <Link to={`/todos/${this.state.todo.id}/edit`} style={{ textDecoration:'none', display:'inline-block' }}>
+                        <Link to={`/categories/${this.state.category_id}/todos/${this.state.todo.id}/edit`} style={{ textDecoration:'none', display:'inline-block' }}>
                             <div className='button-link-design' style={{backgroundColor:'#2a9d8f', fontSize:'16px'}}>
                                 Edit
                             </div>
                         </Link>
                     </div>
                     <div className='centering-div'>
-                        <Link to={`/`} style={{ textDecoration:'none', display:'inline-block' }}>
+                        <Link to={`/categories/${this.state.category_id}/todos`} style={{ textDecoration:'none', display:'inline-block' }}>
                             <div className='button-link-design' style={{backgroundColor:'#2a9d8f',fontSize:'16px'}}>
                                 Home
                             </div>

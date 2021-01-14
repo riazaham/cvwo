@@ -42,8 +42,15 @@ class NewTodo extends Component {
     }
 
     onSubmit(event) {
+        const {
+            match: {
+                params: { category_id  }
+            }
+        } = this.props;
+
+        const url = `/api/v1/categories/${category_id}/todos`;
+
         event.preventDefault();
-        const url = "/api/v1/todos";
         const {name, body, deadline, progress} = this.state
 
         const data = {
@@ -66,7 +73,7 @@ class NewTodo extends Component {
             }
         })
         .then(response => {
-            this.props.history.push(`/todos/${response.id}`)
+            this.props.history.push(`/categories/${category_id}/todos/${response.id}`)
         }).catch(error => console.log(error.message));
     }
 

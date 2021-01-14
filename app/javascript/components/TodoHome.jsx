@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import '../../assets/stylesheets/Home.css';
+import '../../assets/stylesheets/todoHome.css';
 
-class Home extends Component {
+class TodoHome extends Component {
     constructor(props) {
         super(props);
         this.state = {
             todos: [],
+            category_id: '',
             sortOrder: ''
         };
 
@@ -21,7 +22,13 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        const url = "api/v1/todos";
+        const {
+            match: {
+                params: { category_id }
+            }
+        } = this.props;
+
+        const url = `/api/v1/categories/${category_id}/todos`;
         fetch(url)
             .then(response => {
                 if (response.ok) {
@@ -32,6 +39,7 @@ class Home extends Component {
             })
             .then(response => {
                 this.setState({
+                    category_id: category_id,
                     todos: response
                 })
             }).catch(() => this.props.history.push("/"));
@@ -115,7 +123,7 @@ class Home extends Component {
                 </div>
                 <div className='top-button-flex-row'>
                     <div style={{marginLeft:'380px'}}>
-                        <Link to={`/new`} style={{ textDecoration:'none', color:'white', cursor:'pointer', display:'inline-block' }}>
+                        <Link to={`/categories/${this.state.category_id}/todos/new`} style={{ textDecoration:'none', color:'white', cursor:'pointer', display:'inline-block' }}>
                             <div className='button-link-design'>
                                 +
                             </div>
@@ -145,7 +153,7 @@ class Home extends Component {
                 <div>
                     {data.map((todo) => (
                         <div className='centering-div' key={todo.id}>
-                            <Link to={`/todos/${todo.id}`} style={{ textDecoration:'none', display:'inline-block' }}>
+                            <Link to={`/categories/${this.state.category_id}/todos/${todo.id}`} style={{ textDecoration:'none', display:'inline-block' }}>
                                 <br />
                                 <div className='card'>
                                     { todo.name }
@@ -154,9 +162,16 @@ class Home extends Component {
                         </div>
                     ))}
                 </div>
+                <div className='centering-div'>
+                    <Link to={`/`} style={{ textDecoration:'none', display:'inline-block' }}>
+                        <div className='button-link-design' style={{backgroundColor:'#2a9d8f',fontSize:'16px'}}>
+                            Home
+                        </div>
+                    </Link>
+                </div>
             </div>
         );
     };
 }
 
-export default Home
+export default TodoHome

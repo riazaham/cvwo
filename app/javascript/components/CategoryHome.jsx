@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import '../../assets/stylesheets/Home.css';
+import '../../assets/stylesheets/categoryHome.css';
 
 class CategoryHome extends Component {
     constructor(props) {
@@ -59,7 +59,7 @@ class CategoryHome extends Component {
         const data = [].concat(this.state.categories);
         
         return(
-            <div className='home'>
+            <div>
                 <div className='header'>
                     <h1>
                         My Todos
@@ -67,7 +67,7 @@ class CategoryHome extends Component {
                     <p>Profile</p>
                 </div>
                 <div className='top-button-flex-row'>
-                    <div style={{marginLeft:'380px'}}>
+                    <div style={{margin:'0 auto'}}>
                         <Link to={`/categories/new`} style={{ textDecoration:'none', color:'white', cursor:'pointer', display:'inline-block' }}>
                             <div className='button-link-design'>
                                 +
@@ -77,31 +77,29 @@ class CategoryHome extends Component {
                 </div>
                 <br/>
                 <div className='title-card container'>
-                    Title
+                    Categories
                 </div>
-                <div>
+                <div className='category-grid-container'>
                     {data.map((category) => (
-                        <div className='centering-div' key={category.id}>
+                        <div className='category-grid-item' key={category.id}>
                             <Link to={`/categories/${category.id}/todos`} style={{ textDecoration:'none', display:'inline-block' }}>
                                 <br />
-                                <div className='card'>
+                                <div className='category-card'>
                                     { category.name }
+                                    <div className='flex-row'>
+                                        <Link to={`/categories/${category.id}/edit`} style={{ textDecoration:'none', display:'inline-block' }}>
+                                            <div className='button-link-design' style={{backgroundColor:'#2a9d8f', fontSize:'16px'}}>
+                                                Edits
+                                            </div>
+                                        </Link>                                
+                                        <button onClick={() => this.deleteCategory(category.id)} style={{ textDecoration: 'none' }}>
+                                            <div className='button-link-design'>
+                                                -
+                                            </div>
+                                        </button>      
+                                    </div>                            
                                 </div>
                             </Link>
-                            <div className='centering-div'>
-                                <Link to={`/categories/${category.id}/edit`} style={{ textDecoration:'none', display:'inline-block' }}>
-                                    <div className='button-link-design' style={{backgroundColor:'#2a9d8f', fontSize:'16px'}}>
-                                        Edit
-                                    </div>
-                                </Link>
-                            </div>
-                            <div className='centering-div'>
-                                <button onClick={() => this.deleteCategory(category.id)} style={{ textDecoration: 'none' }}>
-                                    <div className='button-link-design'>
-                                        -
-                                    </div>
-                                </button>
-                            </div>
                         </div>
                     ))}
                 </div>

@@ -1,11 +1,13 @@
 class Api::V1::TodosController < ApplicationController
   def index
-    todos = Todo.all.order(created_at: :desc)
+    category = Category.find(params[:category_id])
+    todos = category.todos.all.order(created_at: :desc)
     render json: todos
   end
 
   def create
-    todo = Todo.create!(todo_params)
+    category = Category.find(params[:category_id])
+    todo = category.todos.create!(todo_params)
     if todo
       render json: todo
     else
@@ -14,7 +16,8 @@ class Api::V1::TodosController < ApplicationController
   end
 
   def show
-    todo = Todo.find(params[:id])
+    category = Category.find(params[:category_id])
+    todo = category.todos.find(params[:id])
     if todo
       render json: todo
     else
@@ -23,7 +26,8 @@ class Api::V1::TodosController < ApplicationController
   end
 
   def update
-    todo = Todo.find(params[:id])
+    category = Category.find(params[:category_id])
+    todo = category.todos.find(params[:id])
     if todo.update(todo_params)
       render json: todo
     else
@@ -32,7 +36,8 @@ class Api::V1::TodosController < ApplicationController
   end
 
   def destroy
-    todo = Todo.find(params[:id])
+    category = Category.find(params[:category_id])
+    todo = category.todos.find(params[:id])
     todo&.destroy
     render json: { message: 'Todo deleted!' }
   end

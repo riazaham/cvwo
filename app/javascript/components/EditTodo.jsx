@@ -10,6 +10,7 @@ class EditTodo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            category_id: '',
             name: "",
             body: "",
             deadline: "",
@@ -43,11 +44,11 @@ class EditTodo extends Component {
     componentDidMount() {
         const {
             match: {
-                params: { id }
+                params: { category_id, id  }
             }
         } = this.props;
 
-        const url = `/api/v1/todos/${id}`;
+        const url = `/api/v1/categories/${category_id}/todos/${id}`;
 
         fetch(url)
         .then(response => {
@@ -57,6 +58,7 @@ class EditTodo extends Component {
           throw new Error("Network response was not ok.");
         })
         .then(response => this.setState({ 
+            category_id: category_id,
             name: response.name,
             body: response.body,
             deadline: new Date(response.deadline),
@@ -68,11 +70,11 @@ class EditTodo extends Component {
     onSubmit(event) {
         const {
             match: {
-                params: { id }
+                params: { category_id, id  }
             }
         } = this.props;
 
-        const url = `/api/v1/todos/${id}`;
+        const url = `/api/v1/categories/${category_id}/todos/${id}`;
         
         event.preventDefault();
         const {name, body, deadline, progress} = this.state
@@ -97,7 +99,7 @@ class EditTodo extends Component {
             }
         })
         .then(response => {
-            this.props.history.push(`/todos/${response.id}`)
+            this.props.history.push(`/categories/${category_id}/todos/${response.id}`)
         }).catch(error => console.log(error.message));
     }
 
@@ -174,7 +176,7 @@ class EditTodo extends Component {
                             </button>
                         </div>
                         <div className='centering-div'>
-                            <Link to={`/`} style={{ textDecoration:'none', display:'inline-block' }}>
+                            <Link to={`/categories/${this.state.category_id}/todos`} style={{ textDecoration:'none', display:'inline-block' }}>
                                 <div className='button-link-design' style={{backgroundColor:'#2a9d8f'}}>
                                     H
                                 </div>
