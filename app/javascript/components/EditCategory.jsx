@@ -4,7 +4,7 @@ import '../../assets/stylesheets/NewTodo.css'
 import '../../assets/stylesheets/inputRange.css'
 import "react-datepicker/dist/react-datepicker.css";
 
-class NewCategory extends Component {
+class EditCategory extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,10 +22,40 @@ class NewCategory extends Component {
         });
     }
 
+    componentDidMount() {
+        const {
+            match: {
+                params: { id }
+            }
+        } = this.props;
+
+        const url = `/api/v1/categories/${id}`;
+
+        fetch(url)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Network response was not ok.");
+        })
+        .then(response => this.setState({ 
+            name: response.name,
+            todo_count: response.todo_count
+        }))
+        .catch(() => this.props.history.push("/"));
+    }
+
     onSubmit(event) {
+        const {
+            match: {
+                params: { id }
+            }
+        } = this.props;
+
+        const url = `/api/v1/categories/${id}`;
+
         event.preventDefault();
-        const url = "/api/v1/categories";
-        const {name, todo_count} = this.state
+        const {name, todo_count} = this.state;
 
         const data = {
             name, todo_count
@@ -33,7 +63,7 @@ class NewCategory extends Component {
 
         const token = document.querySelector('meta[name="csrf-token"]').content;
         fetch(url, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 "X-CSRF-Token": token,
                 "Content-Type": "application/json"
@@ -46,9 +76,8 @@ class NewCategory extends Component {
                 throw new Error("Network response not ok");
             }
         })
-        .then(response => {
-            this.props.history.push(`/`)
-        }).catch(error => console.log(error.message));
+        .then(() => this.props.history.push('/'))
+        .catch(error => console.log(error.message));
     }
 
     render() {
@@ -61,7 +90,7 @@ class NewCategory extends Component {
                     <p>Profile</p>
                 </div>
                 <div className='title-card container' style={{textAlign:"center"}}>
-                    Add a new category
+                    Edit category
                 </div>
                 <form onSubmit={this.onSubmit}>
                     <br/>
@@ -69,6 +98,7 @@ class NewCategory extends Component {
                         <label>Name</label>
                         <br/>
                         <input
+                            value={this.state.name}
                             type='text'
                             name='name'
                             id='name'
@@ -97,4 +127,4 @@ class NewCategory extends Component {
     };
 }
 
-export default NewCategory
+export default EditCategory
