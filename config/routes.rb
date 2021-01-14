@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :todos
+      resources :categories do
+        resources :todos
+      end
     end
   end
   root 'home#index'

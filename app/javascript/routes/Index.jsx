@@ -4,11 +4,12 @@ import Home from "../components/Home";
 import NewTodo from "../components/NewTodo";
 import Todo from "../components/Todo";
 import EditTodo from "../components/EditTodo";
+import CategoryHome from "../components/CategoryHome";
 
 export default (
   <Router>
     <Switch>
-      <Route path="/" exact component={Home} />
+      <Route path="/" exact component={CategoryHome} />
       <Route path="/todos" exact component={Home} />
       <Route path="/todos/:id" exact component={Todo} />
       <Route path="/new" exact component={NewTodo} />

@@ -5,6 +5,7 @@ class CreateTodos < ActiveRecord::Migration[6.1]
       t.text :body
       t.string :deadline
       t.integer :progress
+      t.references :category, null: false
 
       t.timestamps
     end

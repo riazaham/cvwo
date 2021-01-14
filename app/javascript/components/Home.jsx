@@ -104,7 +104,7 @@ class Home extends Component {
 
     render() {
         const data = [].concat(this.state.todos);
-
+        
         return(
             <div className='home'>
                 <div className='header'>
