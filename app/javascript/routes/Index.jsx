@@ -7,11 +7,14 @@ import EditTodo from "../components/EditTodo";
 import CategoryHome from "../components/CategoryHome";
 import NewCategory from "../components/NewCategory";
 import EditCategory from "../components/EditCategory";
+import Welcome from "../components/Welcome";
+import Signup from "../components/Signup";
 
 export default (
   <Router>
     <Switch>
-      <Route path="/" exact component={CategoryHome} />
+      <Route path="/" exact component={Welcome} />
+      <Route path="/signup" exact component={Signup} />
       <Route path="/categories" exact component={CategoryHome} />
       <Route path="/categories/new" exact component={NewCategory} />
       <Route path="/categories/:id/edit" exact component={EditCategory} />

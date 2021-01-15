@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'currentUser', to: 'application#current_user'
+  get 'userLoggedIn', to: 'application#logged_in?'
+
+
+  resources :users
+  resources :sessions
+
   namespace :api do
     namespace :v1 do
       resources :categories do
