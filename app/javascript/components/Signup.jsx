@@ -5,7 +5,7 @@ class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            username: '',
             password: ''
         };
 
@@ -17,10 +17,10 @@ class Signup extends Component {
         event.preventDefault();
         const url = '/users'
 
-        const {name, password} = this.state;
+        const {username, password} = this.state;
 
         const data = {
-            name, password
+            username, password
         };
 
         const token = document.querySelector('meta[name="csrf-token"]').content;
@@ -44,9 +44,9 @@ class Signup extends Component {
     }
 
     onChange(event) {
-        this.setState = {
+        this.setState({
             [event.target.name]: event.target.value
-        };
+        });
     }
 
     render() {
@@ -59,10 +59,10 @@ class Signup extends Component {
                             <label>Name:</label>
                             <input
                                 type='text'
-                                name='name'
-                                id='name'
+                                name='username'
+                                id='username'
                                 required
-                                onChange={this.handleChange}
+                                onChange={this.onChange}
                             />
                         </div>
                         <div>
@@ -72,7 +72,7 @@ class Signup extends Component {
                                 name='password'
                                 id='password'
                                 required
-                                onChange={this.handleChange}
+                                onChange={this.onChange}
                             />
                         </div>
                         <button type="submit">Sign Up</button>

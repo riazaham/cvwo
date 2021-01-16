@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
 
   def create
-    user = User.create(user_params)
-    session[:user_id] = user.id
+    user = User.create!(user_params)
     if user
       render json: user
     else

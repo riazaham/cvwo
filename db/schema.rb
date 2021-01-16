@@ -18,8 +18,10 @@ ActiveRecord::Schema.define(version: 2021_01_15_120849) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.integer "todo_count"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
   create_table "todos", force: :cascade do |t|

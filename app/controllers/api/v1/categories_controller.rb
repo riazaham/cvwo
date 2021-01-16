@@ -1,11 +1,13 @@
 class Api::V1::CategoriesController < ApplicationController
   def index
-    categories = Category.all.order(created_at: :desc)
+    user = User.find_by(id: session[:user_id])
+    categories = user.categories.all.order(created_at: :desc)
     render json: categories
   end
 
   def create
-    category = Category.create!(category_params)
+    user = User.find_by(id: session[:user_id])
+    category = user.category.create!(category_params)
     if category
       render json: category
     else
@@ -14,7 +16,8 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   def show
-    category = Category.find(params[:id])
+    user = User.find_by(id: session[:user_id])
+    category = user.category.find(params[:id])
     if category
       render json: category
     else
@@ -23,7 +26,8 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   def update
-    category = Category.find(params[:id])
+    user = User.find_by(id: session[:user_id])
+    category = user.category.find(params[:id])
     if category.update(category_params)
       render json: category
     else
@@ -32,7 +36,8 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   def destroy
-    category = Category.find(params[:id])
+    user = User.find_by(id: session[:user_id])
+    category = user.category.find(params[:id])
     category&.destroy
     render json: { message: 'Category deleted!' }
   end

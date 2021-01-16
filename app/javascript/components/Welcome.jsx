@@ -5,8 +5,9 @@ class Welcome extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            isUserLoggedIn: '',
+            username: '',
+            password: '',
+            user: '',
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -17,10 +18,10 @@ class Welcome extends Component {
         event.preventDefault();
         const url = '/sessions'
 
-        const {name, password} = this.state;
+        const {username, password} = this.state;
 
         const data = {
-            name, password
+            username, password
         };
 
         const token = document.querySelector('meta[name="csrf-token"]').content;
@@ -33,46 +34,30 @@ class Welcome extends Component {
             body: JSON.stringify(data)
         }).then(response => {
             if (response.ok) {
-                return response.text();
+                return response.json();
             } else {
                 throw new Error("Network response not ok");
             }
-        })
-        .then(response => {
-            console.log(response);
-            this.props.history.push("/");
+        }).then(response => {
+            if (response.message === 'User authentication failed') {
+                console.log('User authentication failed, please try again...')
+            } else {
+                this.props.history.push("/categories")
+            }
         }).catch(error => console.log(error.message));
     }
 
     onChange(event) {
-        this.setState = {
+        this.setState({
             [event.target.name]: event.target.value
-        };
-    }
-
-    getIsUserLoggedIn() {
-        const url = '/userLoggedIn';
-
-        fetch(url)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error("Network response was not ok");
-            }
-        }).then(response => {
-            console.log(response)
-            this.setState({
-                isUserLoggedIn: response
-            });
-        }).catch(() => this.props.history.push('/'));
+        });
     }
 
     render() {
-        if (this.state.isUserLoggedIn) {
+        if (this.state.user) {
             return(
                 <div>
-                    <h1>Welcome back, {this.state.name}</h1>
+                    <h1>Welcome back, {this.state.username}</h1>
                 </div>
             );
         }
@@ -85,10 +70,10 @@ class Welcome extends Component {
                             <label>Name:</label>
                             <input
                                 type='text'
-                                name='name'
-                                id='name'
+                                name='username'
+                                id='username'
                                 required
-                                onChange={this.handleChange}
+                                onChange={this.onChange}
                             />
                         </div>
                         <div>
@@ -98,7 +83,7 @@ class Welcome extends Component {
                                 name='password'
                                 id='password'
                                 required
-                                onChange={this.handleChange}
+                                onChange={this.onChange}
                             />
                         </div>
                         <button type='submit'>Login</button>
