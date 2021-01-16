@@ -7,7 +7,7 @@ class Api::V1::CategoriesController < ApplicationController
 
   def create
     user = User.find_by(id: session[:user_id])
-    category = user.category.create!(category_params)
+    category = user.categories.create!(category_params)
     if category
       render json: category
     else
@@ -17,7 +17,7 @@ class Api::V1::CategoriesController < ApplicationController
 
   def show
     user = User.find_by(id: session[:user_id])
-    category = user.category.find(params[:id])
+    category = user.categories.find(params[:id])
     if category
       render json: category
     else
@@ -27,7 +27,7 @@ class Api::V1::CategoriesController < ApplicationController
 
   def update
     user = User.find_by(id: session[:user_id])
-    category = user.category.find(params[:id])
+    category = user.categories.find(params[:id])
     if category.update(category_params)
       render json: category
     else
@@ -37,7 +37,7 @@ class Api::V1::CategoriesController < ApplicationController
 
   def destroy
     user = User.find_by(id: session[:user_id])
-    category = user.category.find(params[:id])
+    category = user.categories.find(params[:id])
     category&.destroy
     render json: { message: 'Category deleted!' }
   end

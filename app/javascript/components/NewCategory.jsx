@@ -47,7 +47,7 @@ class NewCategory extends Component {
             }
         })
         .then(response => {
-            this.props.history.push(`/`)
+            this.props.history.push(`/categories`)
         }).catch(error => console.log(error.message));
     }
 

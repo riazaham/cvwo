@@ -42,7 +42,7 @@ class TodoHome extends Component {
                     category_id: category_id,
                     todos: response
                 })
-            }).catch(() => this.props.history.push("/"));
+            }).catch(() => this.props.history.push("/categories"));
     }
 
     onSortOrderChange(e) {
@@ -163,7 +163,7 @@ class TodoHome extends Component {
                     ))}
                 </div>
                 <div className='centering-div'>
-                    <Link to={`/`} style={{ textDecoration:'none', display:'inline-block' }}>
+                    <Link to={`/categories`} style={{ textDecoration:'none', display:'inline-block' }}>
                         <div className='button-link-design' style={{backgroundColor:'#2a9d8f',fontSize:'16px'}}>
                             Home
                         </div>
