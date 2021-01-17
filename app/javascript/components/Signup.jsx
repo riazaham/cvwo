@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import '../../assets/stylesheets/signup.css'
 
 class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: '',
+            email: '',
             password: ''
         };
 
@@ -51,8 +53,8 @@ class Signup extends Component {
 
     render() {
         return(
-            <div>
-                <h1>Welcome</h1>
+            <div className='signup-card'>
+                <h1>MyTodos Register</h1>
                 <div>
                     <form onSubmit={this.onSubmit}>
                         <div>
@@ -61,6 +63,17 @@ class Signup extends Component {
                                 type='text'
                                 name='username'
                                 id='username'
+                                maxLength='16'
+                                required
+                                onChange={this.onChange}
+                            />
+                        </div>
+                        <div>
+                            <label>Email:</label>
+                            <input
+                                type='text'
+                                name='email'
+                                id='email'
                                 required
                                 onChange={this.onChange}
                             />
@@ -71,11 +84,18 @@ class Signup extends Component {
                                 type='password'
                                 name='password'
                                 id='password'
+                                minLength='6'
                                 required
                                 onChange={this.onChange}
                             />
                         </div>
-                        <button type="submit">Sign Up</button>
+                        <div className='signup-flex-button-row'>
+                            <button type='submit' style={{ textDecoration: 'none' }}>
+                                <div className='signup-button-link-design'>
+                                    Sign up
+                                </div>
+                            </button> 
+                        </div>
                     </form>
                 </div>
             </div>

@@ -7,6 +7,8 @@
     padding: 16px;
     margin: 0 auto;
     position: relative;
+    text-decoration: none;
+    color: black;
 }
 
 .title-card {
@@ -78,4 +80,14 @@
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+.logout-button {
+    color: black;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    color: red;
 }

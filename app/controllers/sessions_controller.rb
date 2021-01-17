@@ -9,4 +9,9 @@ class SessionsController < ApplicationController
       render json: { message: "User authentication failed" }
     end
   end
+
+  def destroy
+    session[:user_id] = nil
+    render json: { message: "User logged out successfully" }
+  end
 end

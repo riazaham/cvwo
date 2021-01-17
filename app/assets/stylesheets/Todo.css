@@ -43,3 +43,10 @@ button {
     outline:none;
 }
 
+.button-flex-row {
+    display: flex;
+    width: fit-content;
+    gap: 20px;
+    margin: 0 auto;
+}
+

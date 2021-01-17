@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import '../../assets/stylesheets/welcome.css'
 
 class Welcome extends Component {
     constructor(props) {
@@ -54,16 +55,9 @@ class Welcome extends Component {
     }
 
     render() {
-        if (this.state.user) {
-            return(
-                <div>
-                    <h1>Welcome back, {this.state.username}</h1>
-                </div>
-            );
-        }
         return(
-            <div>
-                <h1>Welcome</h1>
+            <div className='welcome-card'>
+                <h1>MyTodos Login</h1>
                 <div>
                     <form onSubmit={this.onSubmit}>
                         <div>
@@ -86,8 +80,18 @@ class Welcome extends Component {
                                 onChange={this.onChange}
                             />
                         </div>
-                        <button type='submit'>Login</button>
-                        <Link to='/signup'>Register</Link>
+                        <div className='welcome-flex-button-row'>
+                            <button onClick={this.onSubmit} style={{ textDecoration: 'none' }}>
+                                <div className='welcome-button-link-design'>
+                                    Login
+                                </div>
+                            </button> 
+                            <Link to={`/signup`} style={{ textDecoration:'none' }}>
+                                <div className='welcome-button-link-design' style={{backgroundColor:'#2a9d8f', fontSize:'14px'}}>
+                                    Register
+                                </div>
+                            </Link>                                  
+                        </div>    
                     </form>
                 </div>
             </div>

@@ -2,7 +2,7 @@ class Api::V1::CategoriesController < ApplicationController
   def index
     user = User.find_by(id: session[:user_id])
     categories = user.categories.all.order(created_at: :desc)
-    render json: categories
+    render json: { user: user, categories: categories }
   end
 
   def create

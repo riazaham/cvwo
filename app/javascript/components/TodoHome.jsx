@@ -153,7 +153,7 @@ class TodoHome extends Component {
                 <div>
                     {data.map((todo) => (
                         <div className='centering-div' key={todo.id}>
-                            <Link to={`/categories/${this.state.category_id}/todos/${todo.id}`} style={{ textDecoration:'none', display:'inline-block' }}>
+                            <Link to={`/categories/${this.state.category_id}/todos/${todo.id}`} style={{textDecoration: 'none'}}>
                                 <br />
                                 <div className='card'>
                                     { todo.name }
@@ -164,7 +164,7 @@ class TodoHome extends Component {
                 </div>
                 <div className='centering-div'>
                     <Link to={`/categories`} style={{ textDecoration:'none', display:'inline-block' }}>
-                        <div className='button-link-design' style={{backgroundColor:'#2a9d8f',fontSize:'16px'}}>
+                        <div className='button-link-design' style={{backgroundColor:'#2a9d8f',fontSize:'16px', marginTop:'20px'}}>
                             Home
                         </div>
                     </Link>

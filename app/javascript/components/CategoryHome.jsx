@@ -6,12 +6,13 @@ class CategoryHome extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categories: [],
-            reloadBool: true,
+            user: '',
+            categories: []
         };
 
         this.deleteCategory = this.deleteCategory.bind(this);
         this.getCategories = this.getCategories.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     componentDidMount() {
@@ -30,7 +31,8 @@ class CategoryHome extends Component {
             })
             .then(response => {
                 this.setState({
-                    categories: response
+                    user: response.user,
+                    categories: response.categories
                 })
             }).catch(() => this.props.history.push("/"));
     }
@@ -47,12 +49,30 @@ class CategoryHome extends Component {
             }
         }).then(response => {
             if (response.ok) {
-                return response.json();
+                this.getCategories();
             } else {
                 throw new Error("Network response was not ok.");
             }
-        }).then(() => this.getCategories())
-        .catch(error => console.log(error.message));
+        }).catch(error => console.log(error.message));
+    }
+
+    logout() {
+        const url = `/sessions/${this.state.user.id}`;
+        const token = document.querySelector('meta[name="csrf-token"]').content;
+
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                "X-CSRF-Token": token,
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            if (response.ok) {
+                this.props.history.push('/');
+            } else {
+                throw new Error("Network response was not ok.");
+            }
+        }).catch(error => console.log(error.message));
     }
 
     render() {
@@ -64,7 +84,10 @@ class CategoryHome extends Component {
                     <h1>
                         My Todos
                     </h1>
-                    <p>Profile</p>
+                    <p>{ this.state.user.username }</p>
+                    <div className='logout-button' onClick={this.logout}>
+                        Logout
+                    </div>
                 </div>
                 <div className='top-button-flex-row'>
                     <div style={{margin:'0 auto'}}>
@@ -82,14 +105,14 @@ class CategoryHome extends Component {
                 <div className='category-grid-container'>
                     {data.map((category) => (
                         <div className='category-grid-item' key={category.id}>
-                            <Link to={`/categories/${category.id}/todos`} style={{ textDecoration:'none', display:'inline-block' }}>
+                            <Link to={`/categories/${category.id}/todos`} style={{ textDecoration: 'none', display:'inline-block' }}>
                                 <br />
                                 <div className='category-card'>
                                     { category.name }
                                     <div className='flex-row'>
                                         <Link to={`/categories/${category.id}/edit`} style={{ textDecoration:'none', display:'inline-block' }}>
                                             <div className='button-link-design' style={{backgroundColor:'#2a9d8f', fontSize:'16px'}}>
-                                                Edits
+                                                Edit
                                             </div>
                                         </Link>                                
                                         <button onClick={() => this.deleteCategory(category.id)} style={{ textDecoration: 'none' }}>
