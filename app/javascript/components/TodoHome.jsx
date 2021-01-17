@@ -122,7 +122,7 @@ class TodoHome extends Component {
                     <p>Profile</p>
                 </div>
                 <div className='top-button-flex-row'>
-                    <div style={{marginLeft:'400px'}}>
+                    <div style={{marginLeft:'390px'}}>
                         <Link to={`/categories/${this.state.category_id}/todos/new`} style={{ textDecoration:'none', color:'white', cursor:'pointer', display:'inline-block' }}>
                             <div className='button-link-design'>
                                 +
