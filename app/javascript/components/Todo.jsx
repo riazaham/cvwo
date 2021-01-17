@@ -86,7 +86,7 @@ class Todo extends React.Component {
                     <div className='todo-flex-column-2'>
                         <div className='todo-flex-item' style={{flexGrow:2}}>
                             <b>Deadline:</b>
-                            <p>{ Moment(this.state.todo.deadline).format("DD MMMM yyyy") }</p>
+                            <p>{ this.state.todo.deadline ? Moment(this.state.todo.deadline).format("DD MMMM yyyy") : '' }</p>
                         </div>
                         <div className='todo-flex-item' style={{flexGrow:2}}>
                             <b>Progress:</b>

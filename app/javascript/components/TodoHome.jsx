@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import '../../assets/stylesheets/todoHome.css';
+import Moment from 'moment';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import '../../assets/stylesheets/circularProgressbar.css';
 
 class TodoHome extends Component {
     constructor(props) {
@@ -155,8 +158,12 @@ class TodoHome extends Component {
                         <div className='centering-div' key={todo.id}>
                             <Link to={`/categories/${this.state.category_id}/todos/${todo.id}`} style={{textDecoration: 'none'}}>
                                 <br />
-                                <div className='card'>
+                                <div className='todo-card'>
                                     { todo.name }
+                                    <div style={{display:'flex', alignItems:'center', width:'200px', marginLeft:'auto', border:'1px solid blue'}}>
+                                        { Moment(todo.deadline).format("DD MMMM yyyy") }
+                                        <CircularProgressbar value={todo.progress}/>
+                                    </div>
                                 </div>
                             </Link>
                         </div>

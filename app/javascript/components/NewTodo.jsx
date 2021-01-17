@@ -5,12 +5,12 @@ import '../../assets/stylesheets/NewTodo.css'
 import '../../assets/stylesheets/inputRange.css'
 import "react-datepicker/dist/react-datepicker.css";
 import InputRange from 'react-input-range';
-import Moment from 'moment';
 
 class NewTodo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            category_id: "",
             name: "",
             body: "",
             deadline: "",
@@ -38,6 +38,18 @@ class NewTodo extends Component {
     onProgressChange(value) {
         this.setState({
             progress: value
+        });
+    }
+
+    componentDidMount() {
+        const {
+            match: {
+                params: { category_id  }
+            }
+        } = this.props;
+
+        this.setState({
+            category_id: category_id
         });
     }
 
@@ -148,7 +160,7 @@ class NewTodo extends Component {
                             </button>
                         </div>
                         <div className='centering-div'>
-                            <Link to={`/`} style={{ textDecoration:'none', display:'inline-block' }}>
+                            <Link to={`/categories/${this.state.category_id}/todos`} style={{ textDecoration:'none', display:'inline-block' }}>
                                 <div className='button-link-design' style={{backgroundColor:'#2a9d8f'}}>
                                     H
                                 </div>

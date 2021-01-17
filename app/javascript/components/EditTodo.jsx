@@ -57,14 +57,16 @@ class EditTodo extends Component {
           }
           throw new Error("Network response was not ok.");
         })
-        .then(response => this.setState({ 
-            category_id: category_id,
-            name: response.name,
-            body: response.body,
-            deadline: new Date(response.deadline),
-            progress: response.progress
-        }))
-        .catch(() => this.props.history.push("/todos"));
+        .then(response => {
+            this.setState({ 
+                category_id: category_id,
+                name: response.name,
+                body: response.body,
+                deadline: response.deadline ? new Date(response.deadline) : '',
+                progress: response.progress
+            })
+        })
+        .catch((error) => console.log(error)); //this.props.history.push(`/categories/${category_id}/todos/`));
     }
 
     onSubmit(event) {
