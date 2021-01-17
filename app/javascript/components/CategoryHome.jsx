@@ -7,7 +7,7 @@ class CategoryHome extends Component {
         super(props);
         this.state = {
             categories: [],
-            reloadBool: true,
+            user: '',
         };
 
         this.deleteCategory = this.deleteCategory.bind(this);
@@ -30,7 +30,8 @@ class CategoryHome extends Component {
             })
             .then(response => {
                 this.setState({
-                    categories: response
+                    categories: response.categories,
+                    user: response.user
                 })
             }).catch(() => this.props.history.push("/"));
     }
@@ -64,7 +65,7 @@ class CategoryHome extends Component {
                     <h1>
                         My Todos
                     </h1>
-                    <p>Profile</p>
+                    <p>{ this.state.user.email }</p>
                 </div>
                 <div className='top-button-flex-row'>
                     <div style={{margin:'0 auto'}}>
