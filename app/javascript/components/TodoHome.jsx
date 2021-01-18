@@ -189,24 +189,28 @@ class TodoHome extends Component {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className='centering-div'>
                     {data.filter((todo) => todo.name.includes(this.state.searchWord)).map((todo) => (
-                        <div className='centering-div' key={todo.id}>
-                            <Link to={`/categories/${this.state.category_id}/todos/${todo.id}`} style={{textDecoration: 'none'}}>
-                                <br />
-                                <div className='todo-card'>
-                                    { todo.name }
-                                    <div style={{display:'flex', alignItems:'center', marginLeft:'auto', gap:'10px'}}>
-                                        { todo.deadline ? Moment(todo.deadline).format("DD MMMM yyyy") : '' }
-                                        <div style={{width:'25px', height:'25px'}}>
-                                            <CircularProgressbar value={todo.progress}/>
-                                        </div>
-                                        <div onClick={() => this.deleteTodo(todo.id)} className='todo-delete-button'>
-                                            -
-                                        </div>
-                                    </div>
+                        <div key={todo.id}>
+                            <br/>
+                            <div className='todo-card-flex-row'>
+                                <div>
+                                    <Link to={`/categories/${this.state.category_id}/todos/${todo.id}`} style={{textDecoration: 'none'}}>
+                                        <span className='todo-card'>
+                                            { todo.name }
+                                            <span style={{display:'flex', alignItems:'center', marginLeft:'auto', gap:'10px'}}>
+                                                { todo.deadline ? Moment(todo.deadline).format("DD MMM yyyy") : '' }
+                                                <span style={{width:'25px', height:'25px'}}>
+                                                    <CircularProgressbar value={todo.progress}/>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </Link>
                                 </div>
-                            </Link>
+                                <div className='todo-delete-button' onClick={() => this.deleteTodo(todo.id)}>
+                                    --
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>

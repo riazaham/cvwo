@@ -114,9 +114,9 @@ class EditCategory extends Component {
                             </button>
                         </div>
                         <div className='centering-div'>
-                            <Link to={`/`} style={{ textDecoration:'none', display:'inline-block' }}>
-                                <div className='button-link-design' style={{backgroundColor:'#2a9d8f'}}>
-                                    H
+                            <Link to={`/categories`} style={{ textDecoration:'none', display:'inline-block' }}>
+                                <div className='button-link-design' style={{backgroundColor:'#2a9d8f', fontSize:'14px'}}>
+                                    Home
                                 </div>
                             </Link>
                         </div>

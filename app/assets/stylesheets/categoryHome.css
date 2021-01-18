@@ -1,12 +1,12 @@
 .category-card {
     /* Add shadows to create the "card" effect */
+    display: block;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 200px;
-    height: 200px;
+    height: 150px;
     padding: 16px;
     margin: 0 auto;
-    position: relative;
     text-decoration: none;
     color: black;
 }
@@ -73,13 +73,10 @@
     width: fit-content;
 }
 
-.flex-row {
+.category-flex-row {
     display: flex;
     width: fit-content;
-    padding: 10px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    margin: 5px auto;
 }
 
 .logout-button {

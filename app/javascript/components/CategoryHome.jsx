@@ -7,12 +7,15 @@ class CategoryHome extends Component {
         super(props);
         this.state = {
             user: '',
-            categories: []
+            categories: [],
+            searchWord: ''
         };
 
         this.deleteCategory = this.deleteCategory.bind(this);
         this.getCategories = this.getCategories.bind(this);
         this.logout = this.logout.bind(this);
+
+        this.setSearchState = this.setSearchState.bind(this);
     }
 
     componentDidMount() {
@@ -75,6 +78,12 @@ class CategoryHome extends Component {
         }).catch(error => console.log(error.message));
     }
 
+    setSearchState(e) {
+        this.setState({
+            searchWord: e.target.value
+        });
+    }
+
     render() {
         const data = [].concat(this.state.categories);
         
@@ -100,29 +109,38 @@ class CategoryHome extends Component {
                 </div>
                 <br/>
                 <div className='title-card container'>
-                    Categories
+                    <div style={{display:'flex', alignItems:'center'}}>
+                        Categories
+                        <div style={{display:'flex', marginLeft:'auto', width:'fit-content', height:'20px', alignItems:'center', gap:'10px'}}>
+                            <label>Search:</label>
+                            <input
+                                type='text'
+                                onChange={this.setSearchState}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className='category-grid-container'>
-                    {data.map((category) => (
+                    {data.filter((category) => category.name.includes(this.state.searchWord)).map((category) => (
                         <div className='category-grid-item' key={category.id}>
                             <Link to={`/categories/${category.id}/todos`} style={{ textDecoration: 'none', display:'inline-block' }}>
                                 <br />
-                                <div className='category-card'>
-                                    { category.name }
-                                    <div className='flex-row'>
-                                        <Link to={`/categories/${category.id}/edit`} style={{ textDecoration:'none', display:'inline-block' }}>
-                                            <div className='button-link-design' style={{backgroundColor:'#2a9d8f', fontSize:'16px'}}>
-                                                Edit
-                                            </div>
-                                        </Link>                                
-                                        <button onClick={() => this.deleteCategory(category.id)} style={{ textDecoration: 'none' }}>
-                                            <div className='button-link-design'>
-                                                -
-                                            </div>
-                                        </button>      
-                                    </div>                            
-                                </div>
+                                <span className='category-card'>
+                                    { category.name }                          
+                                </span>
                             </Link>
+                            <span className='category-flex-row'>
+                                <button onClick={() => this.deleteCategory(category.id)} style={{ textDecoration: 'none' }}>
+                                    <span className='button-link-design' style={{display:'block'}}>
+                                        -
+                                    </span>
+                                </button>  
+                                <Link to={`/categories/${category.id}/edit`} style={{ textDecoration:'none', display:'inline-block' }}>
+                                    <span className='button-link-design' style={{display:'block', backgroundColor:'#2a9d8f', fontSize:'16px'}}>
+                                        Edit
+                                    </span>
+                                </Link>                                    
+                            </span> 
                         </div>
                     ))}
                 </div>
