@@ -11,10 +11,10 @@ class TodoHome extends Component {
         this.state = {
             todos: [],
             category_id: '',
-            sortOrder: ''
+            sortOrder: '',
+            searchWord: ''
         };
 
-        this.onSortOrderChange = this.onSortOrderChange.bind(this);
         this.changeSortOrder = this.changeSortOrder.bind(this);
         this.sortByProgressAscending = this.sortByProgressAscending.bind(this);
         this.sortByProgressDescending = this.sortByProgressDescending.bind(this);
@@ -22,9 +22,18 @@ class TodoHome extends Component {
         this.sortByCreatedLast = this.sortByCreatedLast.bind(this);
         this.sortByDeadlineAscending = this.sortByDeadlineAscending.bind(this);
         this.sortByDeadlineDescending = this.sortByDeadlineDescending.bind(this);
+
+        this.getTodos = this.getTodos.bind(this);
+        this.deleteTodo = this.deleteTodo.bind(this);
+
+        this.setSearchState = this.setSearchState.bind(this);
     }
 
     componentDidMount() {
+        this.getTodos();
+    }
+
+    getTodos() {
         const {
             match: {
                 params: { category_id }
@@ -48,10 +57,24 @@ class TodoHome extends Component {
             }).catch(() => this.props.history.push("/categories"));
     }
 
-    onSortOrderChange(e) {
-        this.setState({
-            sortOrder: e.target.value
-        })
+    deleteTodo(id) {
+        const url = `/api/v1/categories/${this.state.category_id}/todos/${id}`;
+        const token = document.querySelector('meta[name="csrf-token"]').content;
+
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                "X-CSRF-Token": token,
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            if (response.ok) {
+                this.getTodos();
+            } else {
+                throw new Error("Network response was not ok.");
+            }
+        }).then(() => this.props.history.push(`/categories/${this.state.category_id}/todos`))
+        .catch(error => console.log(error.message));
     }
 
     sortByProgressAscending() {
@@ -90,7 +113,10 @@ class TodoHome extends Component {
         })
     }
 
-    changeSortOrder() {
+    changeSortOrder(e) {
+        this.setState({
+            sortOrder: e.target.value
+        })
         switch (this.state.sortOrder) {
             case 'Progress up':
                 this.sortByProgressAscending();
@@ -111,6 +137,12 @@ class TodoHome extends Component {
                 this.sortByDeadlineDescending();
                 break
         }
+    }
+
+    setSearchState(e) {
+        this.setState({
+            searchWord: e.target.value
+        });
     }
 
     render() {
@@ -134,7 +166,7 @@ class TodoHome extends Component {
                     </div>
                     <div className='sort-button-flex-row'>
                         <label>Sort by:</label>
-                        <select name="sort-by" id="sort-by" onChange={this.onSortOrderChange}>
+                        <select name="sort-by" id="sort-by" onChange={this.changeSortOrder}>
                             <option value="Progress up">Progress Up</option>
                             <option value="Progress down">Progress Down</option>
                             <option value="Created first">Created first</option>
@@ -142,27 +174,36 @@ class TodoHome extends Component {
                             <option value="Deadline up">Deadline up</option>
                             <option value="Deadline down">Deadline down</option>
                         </select>
-                        <button type="button" onClick={this.changeSortOrder}>
-                            <div className='button-link-design' style={{fontSize:'16px', backgroundColor:'#2a9d8f'}}>
-                                Sort
-                            </div>
-                        </button>
                     </div>
                 </div>
                 <br/>
                 <div className='title-card container'>
-                    Title
+                    <div style={{display:'flex', alignItems:'center'}}>
+                        Title
+                        <div style={{display:'flex', marginLeft:'auto', width:'fit-content', height:'20px', alignItems:'center', gap:'10px'}}>
+                            <label>Search:</label>
+                            <input
+                                type='text'
+                                onChange={this.setSearchState}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div>
-                    {data.map((todo) => (
+                    {data.filter((todo) => todo.name.includes(this.state.searchWord)).map((todo) => (
                         <div className='centering-div' key={todo.id}>
                             <Link to={`/categories/${this.state.category_id}/todos/${todo.id}`} style={{textDecoration: 'none'}}>
                                 <br />
                                 <div className='todo-card'>
                                     { todo.name }
-                                    <div style={{display:'flex', alignItems:'center', width:'200px', marginLeft:'auto', border:'1px solid blue'}}>
-                                        { Moment(todo.deadline).format("DD MMMM yyyy") }
-                                        <CircularProgressbar value={todo.progress}/>
+                                    <div style={{display:'flex', alignItems:'center', marginLeft:'auto', gap:'10px'}}>
+                                        { todo.deadline ? Moment(todo.deadline).format("DD MMMM yyyy") : '' }
+                                        <div style={{width:'25px', height:'25px'}}>
+                                            <CircularProgressbar value={todo.progress}/>
+                                        </div>
+                                        <div onClick={() => this.deleteTodo(todo.id)} className='todo-delete-button'>
+                                            -
+                                        </div>
                                     </div>
                                 </div>
                             </Link>

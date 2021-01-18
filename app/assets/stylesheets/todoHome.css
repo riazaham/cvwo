@@ -50,6 +50,30 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
 }
 
+.todo-delete-button {
+    box-shadow: none;
+    border: 1px solid green;
+    transition: 0.3s;
+    margin: auto;
+    text-align: center;
+    color: green;
+    line-height: 25px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background-color: white;
+    font-size: 24px;
+    font-weight: 400;
+    overflow: clip;
+    cursor: pointer;
+}
+
+.todo-delete-button:hover {
+    box-shadow: none;
+    background-color: green;
+    color: white;
+}
+
 .centering-div {
     width: fit-content;
     margin: 0 auto;
