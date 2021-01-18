@@ -126,7 +126,7 @@ class CategoryHome extends Component {
                             <Link to={`/categories/${category.id}/todos`} style={{ textDecoration: 'none', display:'inline-block' }}>
                                 <br />
                                 <span className='category-card'>
-                                    { category.name }                          
+                                    { category.name }                     
                                 </span>
                             </Link>
                             <span className='category-flex-row'>
