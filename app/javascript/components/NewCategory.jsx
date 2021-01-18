@@ -72,6 +72,7 @@ class NewCategory extends Component {
                             type='text'
                             name='name'
                             id='name'
+                            maxLength='24'
                             required
                             onChange={this.onChange}
                         />

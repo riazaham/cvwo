@@ -65,6 +65,11 @@ class Todo extends React.Component {
     }
 
     render() {
+        if (this.state.todo.deadline) {
+            var daysLeft = Moment(this.state.todo.deadline).diff(new Date(), 'days');
+        }
+        var daysLeftText = `${daysLeft} days`
+
         return(
             <div className='todo'>
                 <div className='header'>
@@ -87,10 +92,14 @@ class Todo extends React.Component {
                         <div className='todo-flex-item' style={{flexGrow:2}}>
                             <b>Deadline:</b>
                             <p>{ this.state.todo.deadline ? Moment(this.state.todo.deadline).format("DD MMM yyyy") : '' }</p>
+                            <div style={{margin:'0 auto', width:'100px', height:'100px'}}>
+                                <CircularProgressbar value={100} text={daysLeftText}/>                          
+                            </div>
                         </div>
                         <div className='todo-flex-item' style={{flexGrow:2}}>
                             <b>Progress:</b>
-                            <p style={{textAlign:'center'}}><CircularProgressbar value={this.state.todo.progress} text={`${this.state.todo.progress}%`} /></p>  
+                            <br/><br/>
+                            <div style={{margin:'0 auto', width:'100px', height:'100px'}}><CircularProgressbar value={this.state.todo.progress} text={`${this.state.todo.progress}%`} /></div>  
                         </div>
                     </div>
                 </div>
@@ -104,16 +113,16 @@ class Todo extends React.Component {
                         </button>
                     </div>
                     <div className='centering-div'>
-                        <Link to={`/categories/${this.state.category_id}/todos/${this.state.todo.id}/edit`} style={{ textDecoration:'none', display:'inline-block' }}>
-                            <div className='button-link-design' style={{backgroundColor:'#2a9d8f', fontSize:'16px'}}>
-                                Edit
+                        <Link to={`/categories/${this.state.category_id}/todos`} style={{ textDecoration:'none', display:'inline-block' }}>
+                            <div className='button-link-design' style={{backgroundColor:'#264653',fontSize:'16px'}}>
+                                Home
                             </div>
                         </Link>
                     </div>
                     <div className='centering-div'>
-                        <Link to={`/categories/${this.state.category_id}/todos`} style={{ textDecoration:'none', display:'inline-block' }}>
-                            <div className='button-link-design' style={{backgroundColor:'#2a9d8f',fontSize:'16px'}}>
-                                Home
+                        <Link to={`/categories/${this.state.category_id}/todos/${this.state.todo.id}/edit`} style={{ textDecoration:'none', display:'inline-block' }}>
+                            <div className='button-link-design' style={{backgroundColor:'#2a9d8f', fontSize:'16px'}}>
+                                Edit
                             </div>
                         </Link>
                     </div>

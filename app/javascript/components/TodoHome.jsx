@@ -201,7 +201,7 @@ class TodoHome extends Component {
                                             <span style={{display:'flex', alignItems:'center', marginLeft:'auto', gap:'10px'}}>
                                                 { todo.deadline ? Moment(todo.deadline).format("DD MMM yyyy") : '' }
                                                 <span style={{width:'25px', height:'25px'}}>
-                                                    <CircularProgressbar value={todo.progress}/>
+                                                    <CircularProgressbar className='width100' value={todo.progress}/>
                                                 </span>
                                             </span>
                                         </span>
