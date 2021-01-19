@@ -1,13 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+<<<<<<< HEAD
   name: MyString
+=======
+  title: MyString
+>>>>>>> 21caf8ea6902cb58b89c4111f5e58ffe4c556ec4
   body: MyText
   deadline: MyString
   progress: MyString
 
 two:
+<<<<<<< HEAD
   name: MyString
+=======
+  title: MyString
+>>>>>>> 21caf8ea6902cb58b89c4111f5e58ffe4c556ec4
   body: MyText
   deadline: MyString
   progress: MyString

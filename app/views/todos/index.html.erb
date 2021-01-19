@@ -1,0 +1,41 @@
+<h1 style="text-align: center; margin: 50px 0px;">
+	<span style="border-style: solid none solid none; border-color: dodgerblue; padding: 10px;">
+		Todos
+	</span>
+</h1>
+
+<div style="border: 3px solid dodgerblue; border-radius: 10px; width: 600px; margin: 10px auto; padding: 10px;">
+	<table style="width: 600px;">
+		<tr>
+			<td style="width: 400px;text-align: center;">Todo</td>
+			<td style="width: 100px;">Deadline</td>
+			<td style="width: 100px;">Progress</td>
+		</tr>
+	</table>
+</div>
+
+<ol style="list-style-type: none; margin: 0; padding: 0;">
+	<% @todos.each do |todo| %>
+	<div style="border: 3px solid lightsalmon; border-radius: 10px; width: 600px; margin: 10px auto; padding: 10px;">
+		<li>
+			<table style="width: 600px;">
+				<tr>
+					<td style="width: 400px;">
+						<%= link_to todo.title, todo %>	
+					</td>
+					<td style="width: 100px;">
+						<%= todo.deadline %>	
+					</td>
+					<td style="width: 100px;">
+						<%= todo.progress %>	
+					</td>
+				</tr>
+			</table>
+		</li>
+	</div>
+	<% end %>
+</ol>
+
+<div style="border: 3px solid dodgerblue; border-radius: 20px; width: 100px; margin: 10px auto; padding: 10px; text-align: center">
+	<%= link_to "New Todo", new_todo_path %>
+</div>

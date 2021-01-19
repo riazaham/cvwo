@@ -9,4 +9,5 @@ class ApplicationController < ActionController::Base
         isUserLoggedIn = !current_user.nil?
         render json: isUserLoggedIn
     end
+
 end
